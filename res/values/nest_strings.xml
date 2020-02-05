@@ -84,4 +84,9 @@
     <string name="dock_theme_title">Themed icons</string>
     <string name="dock_theme_summary">Use themed icons for search bar</string>
     <string name="search_radius_title">Corner radius</string>
+
+    <!-- DT2S -->
+    <string name="pref_sleep_gesture_title">Double tap to sleep</string>
+    <string name="pref_sleep_gesture_summary">Double tap on empty space for screen off</string>
+
 </resources>
