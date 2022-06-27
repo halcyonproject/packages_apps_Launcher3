@@ -99,4 +99,7 @@
     <string name="pref_auto_keyboard_title">Auto keyboard</string>
     <string name="pref_auto_keyboard_summary">Start searching when the drawer is expanded</string>
 
+    <!-- Wallpaper scrolling -->
+    <string name="allow_wallpaper_scrolling">Wallpaper scrolling</string>
+    <string name="allow_wallpaper_scrolling_summary">Wallpaper scrolling effect for multiple screens</string>
 </resources>
