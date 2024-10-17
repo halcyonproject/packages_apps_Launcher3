@@ -167,6 +167,7 @@ public final class Utilities {
     public static final String KEY_DOCK_THEME = "pref_dock_theme";
     public static final String KEY_SEARCH_RADIUS = "pref_search_radius_size";
     public static final String KEY_SMARTSPACE = "pref_smartspace";
+    public static final String KEY_AUTO_KEYABORD = "pref_auto_keyboard";
 
     /**
      * Returns true if theme is dark.
@@ -1037,5 +1038,10 @@ public final class Utilities {
     private static boolean isSmartspaceEnabled(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_SMARTSPACE, true);
+    }
+
+    public static boolean enableAutoIme(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_AUTO_KEYABORD, false);
     }
 }
