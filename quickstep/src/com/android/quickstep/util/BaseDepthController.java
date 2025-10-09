@@ -31,6 +31,7 @@ import com.android.launcher3.Flags;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
+import com.android.launcher3.util.LauncherStatesHelper;
 import com.android.launcher3.util.MultiPropertyFactory;
 import com.android.launcher3.util.MultiPropertyFactory.MultiProperty;
 import com.android.systemui.shared.system.BlurUtils;
@@ -150,7 +151,10 @@ public class BaseDepthController {
     protected void onInvalidSurface() { }
 
     protected void applyDepthAndBlur() {
-        float depth = mDepth;
+        boolean forceDepthOrBlur = LauncherStatesHelper.isOverview();
+
+        float depth = forceDepthOrBlur ? 1 : mDepth;
+
         IBinder windowToken = mLauncher.getRootView().getWindowToken();
         if (windowToken != null) {
             if (enableScalingRevealHomeAnimation()) {
@@ -178,7 +182,7 @@ public class BaseDepthController {
         }
         mWaitingOnSurfaceValidity = false;
         boolean hasOpaqueBg = mLauncher.getScrimView().isFullyOpaque();
-        boolean isSurfaceOpaque = !mHasContentBehindLauncher && hasOpaqueBg && !mPauseBlurs;
+        boolean isSurfaceOpaque = !mHasContentBehindLauncher && hasOpaqueBg && !mPauseBlurs && !forceDepthOrBlur;
 
         float blurAmount;
         if (enableScalingRevealHomeAnimation()) {
@@ -186,8 +190,14 @@ public class BaseDepthController {
         } else {
             blurAmount = depth;
         }
-        mCurrentBlur = !mCrossWindowBlursEnabled || hasOpaqueBg || mPauseBlurs
+        
+        mCurrentBlur = !mCrossWindowBlursEnabled || hasOpaqueBg || mPauseBlurs 
                 ? 0 : (int) (blurAmount * mMaxBlurRadius);
+
+        int maxBlurInt = (int) mMaxBlurRadius;
+        if (forceDepthOrBlur && mCurrentBlur != maxBlurInt) {
+            mCurrentBlur = maxBlurInt;
+        }
 
         SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
         if (BlurUtils.supportsBlursOnWindows() && mBlurSurface != null) {
