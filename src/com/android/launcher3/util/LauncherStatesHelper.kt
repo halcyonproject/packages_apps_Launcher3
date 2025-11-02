@@ -55,6 +55,7 @@ object LauncherStatesHelper {
 
     @JvmStatic
     fun shouldHideHomeElements(): Boolean {
+        if (currentState == NORMAL) return false
         val state = currentAnimationState
         val hide = when (state) {
             OVERVIEW, OVERVIEW_SPLIT_SELECT, HINT_STATE,
