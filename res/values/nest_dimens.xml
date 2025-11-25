@@ -14,4 +14,8 @@
     <dimen name="meminfo_bottom_margin_three_button">15dp</dimen>
     <dimen name="meminfo_top_margin">12dp</dimen>
 
+    <!-- Burn-in protection shift amounts -->
+    <dimen name="burn_in_protection_horizontal_shift">12dp</dimen>
+    <dimen name="burn_in_protection_vertical_shift">6dp</dimen>
+
 </resources>
